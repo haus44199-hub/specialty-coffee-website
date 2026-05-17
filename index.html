@@ -1,0 +1,655 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>Brew Haven | Современная кофейня</title>
+    <!-- Google Fonts + Icons -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700&family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: #0B090A;  /* глубокий черный с оттенком кофе */
+            font-family: 'Inter', sans-serif;
+            color: #F5EFE6;
+            line-height: 1.5;
+            scroll-behavior: smooth;
+        }
+
+        /* кастомный скролл */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #1E1A1C;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #C57F3A;
+            border-radius: 10px;
+        }
+
+        .container {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 0 32px;
+        }
+
+        /* типографика */
+        h1, h2, h3, .logo {
+            font-family: 'Playfair Display', serif;
+            font-weight: 600;
+        }
+
+        .section-title {
+            font-size: 2.8rem;
+            margin-bottom: 1rem;
+            letter-spacing: -0.02em;
+            background: linear-gradient(135deg, #F5EFE6 0%, #E0B07F 100%);
+            background-clip: text;
+            -webkit-background-clip: text;
+            color: transparent;
+            display: inline-block;
+        }
+
+        .section-sub {
+            color: #C2A27F;
+            max-width: 600px;
+            margin-bottom: 3rem;
+            font-size: 1.1rem;
+        }
+
+        /* кнопки */
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: transparent;
+            border: 1.5px solid #C57F3A;
+            padding: 12px 28px;
+            font-weight: 600;
+            font-size: 1rem;
+            border-radius: 40px;
+            color: #F5EFE6;
+            transition: all 0.25s ease;
+            cursor: pointer;
+            text-decoration: none;
+            backdrop-filter: blur(2px);
+        }
+
+        .btn-primary {
+            background: #C57F3A;
+            border: 1.5px solid #C57F3A;
+            color: #0B090A;
+            box-shadow: 0 4px 12px rgba(197, 127, 58, 0.2);
+        }
+
+        .btn-primary:hover {
+            background: #D68F48;
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(197, 127, 58, 0.3);
+        }
+
+        .btn-outline:hover {
+            background: rgba(197, 127, 58, 0.1);
+            border-color: #E0A46B;
+            transform: translateY(-2px);
+        }
+
+        /* навигация */
+        nav {
+            padding: 24px 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 20px;
+            border-bottom: 1px solid rgba(197, 127, 58, 0.3);
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            letter-spacing: -0.5px;
+        }
+        .logo span {
+            color: #C57F3A;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 32px;
+            list-style: none;
+        }
+        .nav-links a {
+            text-decoration: none;
+            color: #EADBC6;
+            font-weight: 500;
+            transition: 0.2s;
+        }
+        .nav-links a:hover {
+            color: #C57F3A;
+        }
+
+        /* hero секция */
+        .hero {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: space-between;
+            padding: 60px 0 80px;
+            gap: 40px;
+        }
+        .hero-content {
+            flex: 1.2;
+        }
+        .hero-badge {
+            background: rgba(197, 127, 58, 0.2);
+            padding: 6px 16px;
+            border-radius: 40px;
+            font-size: 0.8rem;
+            display: inline-block;
+            margin-bottom: 20px;
+            border-left: 2px solid #C57F3A;
+        }
+        .hero-content h1 {
+            font-size: 4rem;
+            line-height: 1.2;
+            margin-bottom: 20px;
+        }
+        .hero-content p {
+            font-size: 1.15rem;
+            color: #D9CAB8;
+            max-width: 550px;
+            margin-bottom: 32px;
+        }
+        .hero-stats {
+            display: flex;
+            gap: 32px;
+            margin-top: 32px;
+        }
+        .stat h4 {
+            font-size: 1.9rem;
+            font-weight: 700;
+            color: #E0B07F;
+        }
+        .hero-img {
+            flex: 0.9;
+            background: linear-gradient(145deg, #2A211C, #161110);
+            border-radius: 40px;
+            padding: 20px;
+            text-align: center;
+            box-shadow: 0 25px 35px -12px rgba(0,0,0,0.5);
+            border: 1px solid rgba(197, 127, 58, 0.3);
+        }
+        .hero-img i {
+            font-size: 9rem;
+            color: #C57F3A;
+            filter: drop-shadow(0 8px 12px rgba(0,0,0,0.4));
+        }
+        .hero-img p {
+            margin-top: 20px;
+            font-size: 0.9rem;
+            letter-spacing: 2px;
+        }
+
+        /* кофейная сетка */
+        .menu-preview {
+            padding: 80px 0;
+        }
+        .coffee-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+            margin-top: 20px;
+        }
+        .coffee-card {
+            background: #151112;
+            border-radius: 28px;
+            padding: 28px 20px;
+            transition: transform 0.25s ease, box-shadow 0.3s;
+            border: 1px solid #2F2621;
+            backdrop-filter: blur(2px);
+            text-align: center;
+        }
+        .coffee-card:hover {
+            transform: translateY(-8px);
+            border-color: #C57F3A;
+            box-shadow: 0 20px 30px -15px rgba(197, 127, 58, 0.2);
+        }
+        .coffee-icon {
+            font-size: 3.5rem;
+            color: #C57F3A;
+            margin-bottom: 16px;
+        }
+        .coffee-card h3 {
+            font-size: 1.7rem;
+            margin-bottom: 12px;
+        }
+        .price {
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: #E0B07F;
+            margin: 12px 0;
+        }
+        .card-desc {
+            color: #B9A990;
+            font-size: 0.9rem;
+            margin-bottom: 20px;
+        }
+        .order-btn {
+            background: none;
+            border: 1px solid #C57F3A;
+            padding: 8px 18px;
+            border-radius: 30px;
+            font-weight: 500;
+            transition: 0.2s;
+            cursor: pointer;
+            color: #F5EFE6;
+        }
+        .order-btn:hover {
+            background: #C57F3A;
+            color: #0B090A;
+        }
+
+        /* почему мы */
+        .features {
+            background: linear-gradient(120deg, #100C0D 0%, #181212 100%);
+            border-radius: 60px;
+            padding: 60px 40px;
+            margin: 40px 0;
+            border: 1px solid #2F2621;
+        }
+        .feature-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 48px;
+            justify-content: space-between;
+            margin-top: 32px;
+        }
+        .feature-item {
+            flex: 1;
+            min-width: 200px;
+            text-align: center;
+        }
+        .feature-item i {
+            font-size: 2.5rem;
+            color: #C57F3A;
+            margin-bottom: 16px;
+        }
+        .feature-item h4 {
+            font-size: 1.4rem;
+            margin-bottom: 8px;
+        }
+
+        /* форма контакта */
+        .contact-section {
+            padding: 60px 0 80px;
+        }
+        .contact-wrapper {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 40px;
+            background: #13100E;
+            border-radius: 48px;
+            padding: 48px 40px;
+            border: 1px solid #2F2621;
+        }
+        .contact-info {
+            flex: 1;
+        }
+        .contact-info h3 {
+            font-size: 2rem;
+            margin-bottom: 20px;
+        }
+        .contact-detail {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin: 24px 0;
+        }
+        .contact-detail i {
+            font-size: 1.4rem;
+            color: #C57F3A;
+            width: 32px;
+        }
+        .contact-form {
+            flex: 1;
+        }
+        .input-group {
+            margin-bottom: 20px;
+        }
+        input, textarea {
+            width: 100%;
+            background: #1E1918;
+            border: 1px solid #3A2D27;
+            padding: 14px 18px;
+            border-radius: 32px;
+            font-family: 'Inter', sans-serif;
+            color: #F5EFE6;
+            transition: 0.2s;
+        }
+        input:focus, textarea:focus {
+            outline: none;
+            border-color: #C57F3A;
+            box-shadow: 0 0 0 2px rgba(197, 127, 58, 0.3);
+        }
+        textarea {
+            resize: vertical;
+            min-height: 100px;
+        }
+        .submit-btn {
+            background: #C57F3A;
+            border: none;
+            padding: 12px 32px;
+            border-radius: 40px;
+            font-weight: bold;
+            font-size: 1rem;
+            color: #0B090A;
+            cursor: pointer;
+            transition: 0.2s;
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+        }
+        .submit-btn:hover {
+            background: #D68F48;
+            transform: scale(1.01);
+        }
+
+        /* футер */
+        footer {
+            text-align: center;
+            padding: 48px 0 32px;
+            border-top: 1px solid #2A201C;
+            margin-top: 40px;
+            color: #9C897C;
+        }
+        .social-icons {
+            display: flex;
+            justify-content: center;
+            gap: 24px;
+            margin: 24px 0 20px;
+        }
+        .social-icons a {
+            color: #C2A27F;
+            font-size: 1.3rem;
+            transition: 0.2s;
+        }
+        .social-icons a:hover {
+            color: #C57F3A;
+            transform: translateY(-3px);
+        }
+
+        /* анимация появления */
+        @keyframes fadeUp {
+            from { opacity: 0; transform: translateY(20px);}
+            to { opacity: 1; transform: translateY(0);}
+        }
+        .animate {
+            animation: fadeUp 0.6s ease forwards;
+        }
+
+        @media (max-width: 850px) {
+            .container {
+                padding: 0 24px;
+            }
+            .hero-content h1 {
+                font-size: 2.8rem;
+            }
+            .section-title {
+                font-size: 2.2rem;
+            }
+            nav {
+                flex-direction: column;
+            }
+            .hero {
+                flex-direction: column;
+                text-align: center;
+            }
+            .hero-stats {
+                justify-content: center;
+            }
+            .hero-content p {
+                margin-left: auto;
+                margin-right: auto;
+            }
+        }
+        @media (max-width: 560px) {
+            .nav-links {
+                gap: 20px;
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            .features {
+                padding: 40px 20px;
+            }
+            .contact-wrapper {
+                padding: 28px 20px;
+            }
+        }
+        .toast-msg {
+            position: fixed;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: #C57F3A;
+            color: #0B090A;
+            padding: 12px 24px;
+            border-radius: 60px;
+            font-weight: 600;
+            z-index: 1000;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+            opacity: 0;
+            transition: 0.2s;
+            pointer-events: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <nav>
+            <div class="logo">BREW <span>HAVEN</span></div>
+            <ul class="nav-links">
+                <li><a href="#">Главная</a></li>
+                <li><a href="#menu">Кофе</a></li>
+                <li><a href="#about">О нас</a></li>
+                <li><a href="#contact">Контакты</a></li>
+            </ul>
+            <a href="#contact" class="btn btn-primary" style="padding: 8px 24px;">Забронировать столик</a>
+        </nav>
+    </div>
+
+    <main>
+        <div class="container">
+            <!-- hero -->
+            <div class="hero">
+                <div class="hero-content">
+                    <div class="hero-badge"><i class="fas fa-mug-hot"></i>  artisanal roasting • since 2025</div>
+                    <h1>Где зерно <br>превращается в <span style="color:#C57F3A">искусство</span></h1>
+                    <p>Спешелти кофе из этичных регионов, ручная обжарка и уютная атмосфера. Откройте новый ритуал с Brew Haven.</p>
+                    <div style="display: flex; gap: 16px; flex-wrap: wrap;">
+                        <a href="#menu" class="btn btn-primary"><i class="fas fa-coffee"></i> Смотреть меню</a>
+                        <a href="#contact" class="btn btn-outline"><i class="fas fa-map-marker-alt"></i> Найти нас</a>
+                    </div>
+                    <div class="hero-stats">
+                        <div class="stat"><h4>15+</h4><p>сортов зерна</p></div>
+                        <div class="stat"><h4>4.9 ★</h4><p>рейтинг гостей</p></div>
+                        <div class="stat"><h4>365</h4><p>дней аромата</p></div>
+                    </div>
+                </div>
+                <div class="hero-img">
+                    <i class="fas fa-mug-hot"></i>
+                    <p>✦ specialty coffee everyday ✦</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- меню / карточки кофе -->
+        <section id="menu" class="menu-preview">
+            <div class="container">
+                <h2 class="section-title">Авторский кофе</h2>
+                <p class="section-sub">Только моносорта и фирменные миксы, которые раскрываются в чашке</p>
+                <div class="coffee-grid" id="coffeeGrid"></div>
+            </div>
+        </section>
+
+        <!-- почему мы -->
+        <div class="container" id="about">
+            <div class="features">
+                <div style="text-align: center;">
+                    <h2 class="section-title" style="background: linear-gradient(135deg,#EADBC6,#C57F3A); background-clip:text; -webkit-background-clip:text;">Кофе — это путешествие</h2>
+                    <p class="section-sub" style="margin-bottom: 0;">Мы создаём пространство, где каждая деталь работает на вкус</p>
+                </div>
+                <div class="feature-grid">
+                    <div class="feature-item"><i class="fas fa-seedling"></i><h4>Прямые поставки</h4><p>Работаем с фермерами напрямую, без посредников</p></div>
+                    <div class="feature-item"><i class="fas fa-fire"></i><h4>Кастомная обжарка</h4><p>Разные профили под эспрессо, фильтр и альтернативу</p></div>
+                    <div class="feature-item"><i class="fas fa-hand-sparkles"></i><h4>Лаборатория вкуса</h4><p>Каппинги и дегустации каждую неделю</p></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- контактная форма -->
+        <section id="contact" class="contact-section">
+            <div class="container">
+                <div class="contact-wrapper">
+                    <div class="contact-info">
+                        <h3>Забронировать <br> <span style="color:#C57F3A">кофейный опыт</span></h3>
+                        <p style="margin: 16px 0 24px;">Приходите попробовать наш новый сезонный эспрессо или закажите столик для утреннего кофе.</p>
+                        <div class="contact-detail"><i class="fas fa-map-pin"></i> <span>ул. Ароматная 12, Москва</span></div>
+                        <div class="contact-detail"><i class="fas fa-phone-alt"></i> <span>+7 (495) 555-COFFEE</span></div>
+                        <div class="contact-detail"><i class="fas fa-clock"></i> <span>Ежедневно 08:00 – 22:00</span></div>
+                        <div class="social-icons" style="justify-content: flex-start; margin-top: 20px;">
+                            <a href="#"><i class="fab fa-instagram"></i></a>
+                            <a href="#"><i class="fab fa-telegram"></i></a>
+                            <a href="#"><i class="fab fa-youtube"></i></a>
+                        </div>
+                    </div>
+                    <div class="contact-form">
+                        <form id="coffeeForm">
+                            <div class="input-group"><input type="text" placeholder="Ваше имя" id="name" required></div>
+                            <div class="input-group"><input type="email" placeholder="E-mail" id="email" required></div>
+                            <div class="input-group"><input type="tel" placeholder="Телефон" id="phone"></div>
+                            <div class="input-group"><textarea placeholder="Ваш любимый способ заваривания? Или пожелания" id="message"></textarea></div>
+                            <button type="submit" class="submit-btn"><i class="fas fa-paper-plane"></i> Отправить заявку</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <div class="logo" style="font-size: 1.5rem;">BREW <span>HAVEN</span></div>
+            <div class="social-icons">
+                <a href="#"><i class="fab fa-instagram"></i></a>
+                <a href="#"><i class="fab fa-facebook-f"></i></a>
+                <a href="#"><i class="fab fa-twitter"></i></a>
+            </div>
+            <p>© 2025 Brew Haven — всё для кофейного наслаждения. <br> Сделано с <i class="fas fa-heart" style="color:#C57F3A"></i> для портфолио.</p>
+        </div>
+    </footer>
+    <div id="toast" class="toast-msg">✓ Спасибо! Мы свяжемся с вами в ближайшее время</div>
+
+    <script>
+        // данные кофе для динамического рендера
+        const coffeeMenu = [
+            { name: "Эфиопия Иргачиф", desc: "Ягоды, жасмин, чайное тело", price: "320 ₽", icon: "fas fa-mug-saucer" },
+            { name: "Колумбия Геша", desc: "Цитрус, карамель, цветочный финиш", price: "490 ₽", icon: "fas fa-leaf" },
+            { name: "Коста-Рика", desc: "Молочный шоколад, орехи, плотный", price: "350 ₽", icon: "fas fa-fire" },
+            { name: "Флэт Уайт", desc: "Двойной раф на коричневом сахаре", price: "380 ₽", icon: "fas fa-heart" }
+        ];
+
+        const gridContainer = document.getElementById('coffeeGrid');
+        function renderCoffee() {
+            if (!gridContainer) return;
+            gridContainer.innerHTML = '';
+            coffeeMenu.forEach(item => {
+                const card = document.createElement('div');
+                card.className = 'coffee-card';
+                card.innerHTML = `
+                    <div class="coffee-icon"><i class="${item.icon}"></i></div>
+                    <h3>${item.name}</h3>
+                    <div class="price">${item.price}</div>
+                    <p class="card-desc">${item.desc}</p>
+                    <button class="order-btn" data-coffee="${item.name}"><i class="fas fa-shopping-cart"></i> Заказать</button>
+                `;
+                gridContainer.appendChild(card);
+            });
+            // добавить обработку кнопок заказа
+            document.querySelectorAll('.order-btn').forEach(btn => {
+                btn.addEventListener('click', (e) => {
+                    const coffeeName = btn.getAttribute('data-coffee');
+                    showToast(`☕ ${coffeeName} добавлен в корзину (демо)`);
+                });
+            });
+        }
+        renderCoffee();
+
+        // функция тост уведомлений
+        function showToast(message) {
+            const toastEl = document.getElementById('toast');
+            toastEl.textContent = message;
+            toastEl.style.opacity = '1';
+            setTimeout(() => {
+                toastEl.style.opacity = '0';
+            }, 2800);
+        }
+
+        // обработка формы (имитация отправки)
+        const contactForm = document.getElementById('coffeeForm');
+        if(contactForm) {
+            contactForm.addEventListener('submit', (e) => {
+                e.preventDefault();
+                const name = document.getElementById('name')?.value.trim();
+                const email = document.getElementById('email')?.value.trim();
+                if(!name || !email) {
+                    showToast('❌ Пожалуйста, заполните имя и email');
+                    return;
+                }
+                // симуляция отправки
+                showToast('✨ Спасибо, ' + name + '! Мы скоро свяжемся с вами.');
+                contactForm.reset();
+            });
+        }
+
+        // плавный скролл для навигации
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                const targetId = this.getAttribute('href');
+                if(targetId === "#" || targetId === "") return;
+                const targetElem = document.querySelector(targetId);
+                if(targetElem) {
+                    e.preventDefault();
+                    targetElem.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+            });
+        });
+
+        // небольшая анимация появления при загрузке (добавим классы)
+        const animateElements = document.querySelectorAll('.hero, .coffee-card, .features, .contact-wrapper');
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if(entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.1 });
+        animateElements.forEach(el => {
+            el.style.opacity = '0';
+            el.style.transform = 'translateY(25px)';
+            el.style.transition = 'opacity 0.6s ease, transform 0.5s ease';
+            observer.observe(el);
+        });
+        // кнопка заказа карточки также добавим стили
+    </script>
+</body>
+</html>
