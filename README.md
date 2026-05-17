@@ -35,6 +35,6 @@ This is a static website. You can run it in two simple ways:
 
 ### 1. Clone & Open
 ```bash
-git clone https://github.com/yourusername/coffee-shop-landing.git
+git clone https://haus44199-hub.github.io/specialty-coffee-website/
 cd coffee-shop-landing
 # Simply open index.html in your browser
